@@ -82,10 +82,9 @@ public class GHDiscussionTest extends AbstractGitHubWireMockTest {
         assertThat(discussion.getBody(), equalTo("This is a public discussion"));
         assertThat(discussion.isPrivate(), is(false));
 
-        discussion.set().body("This is a public discussion changed");
-        discussion.update();
-        assertThat(discussion, notNullValue());
-        assertThat(discussion.getBody(), equalTo("This is a public discussion changed"));
+        GHDiscussion discussionChanged = discussion.update().body("This is a public discussion changed").done();
+        assertThat(discussionChanged, notNullValue());
+        assertThat(discussionChanged.getBody(), equalTo("This is a public discussion changed"));
     }
 
     @Test
